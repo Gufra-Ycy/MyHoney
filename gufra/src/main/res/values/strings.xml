@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">gufra</string>
+    <string name="drawer_start">start</string>
+    <string name="drawer_end">end</string>
+</resources>
