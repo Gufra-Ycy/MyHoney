@@ -7,13 +7,18 @@ import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.graphics.drawable.Drawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Build;
+import android.util.Base64;
 import android.view.Window;
 import android.view.WindowManager;
 
 import java.io.File;
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -157,5 +162,38 @@ public class AppUtils {
      */
     private static PackageManager getPackageManager(Context context){
         return context.getPackageManager();
+    }
+
+    /*
+    * 判断网络是否有连接
+    * @param
+    * */
+
+    public boolean checkNetWork(Context context){
+        ConnectivityManager cm = (ConnectivityManager)context.getSystemService(context.CONNECTIVITY_SERVICE);
+        NetworkInfo info = cm.getActiveNetworkInfo();
+        boolean isAvailable = info.isAvailable();
+        return isAvailable;
+    }
+
+    /**
+     * 获取签名keyhash
+     * @param Activity
+     * @return string
+     */
+    public String getKeyHash(Activity activity){
+        String keyHash = "";
+        try {
+            PackageInfo info = activity.getPackageManager().getPackageInfo(activity.getPackageName(), PackageManager
+                    .GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                keyHash = Base64.encodeToString(md.digest(), Base64.DEFAULT);
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return keyHash;
     }
 }

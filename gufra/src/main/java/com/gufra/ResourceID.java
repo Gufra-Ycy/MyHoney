@@ -12,4 +12,8 @@ public class ResourceID {
     public static class id{
         public static int et_user = getRes("et_user","id");
     }
+
+    public static class string{
+
+    }
 }

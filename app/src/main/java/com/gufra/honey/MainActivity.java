@@ -18,7 +18,7 @@ public class MainActivity extends Activity {
         //启动闪屏动画
         ConstraintLayout layout = (ConstraintLayout)findViewById(R.id.main_layout);
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.1f,1.0f);
-        alphaAnimation.setDuration(1500);//1000毫秒
+        alphaAnimation.setDuration(1000);//1000毫秒
         layout.setAnimation(alphaAnimation);
         alphaAnimation.setAnimationListener(new Animation.AnimationListener() {
             @Override

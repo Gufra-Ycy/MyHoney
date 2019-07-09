@@ -52,6 +52,28 @@
             android:gravity="center"
             android:textSize="20dp"
             android:text="turn to drawerlayout" />
+        <Button
+            android:id="@+id/turn_web"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="打开网页"
+            />
+        <Button
+            android:id="@+id/turn_search"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="查找文件"/>
+        <Button
+            android:id="@+id/turn_practice"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="View练习"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"

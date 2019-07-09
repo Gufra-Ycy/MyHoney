@@ -10,11 +10,17 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gufra.AsyncHttp.NetWorkImpl;
+import com.gufra.Glide.MyGlide;
+import com.gufra.Retrofits.Retrofits;
+import com.gufra.View.marqueeText;
 import com.gufra.Volley.MyVolley;
 import com.gufra.gufra.R;
+import com.ljs.lovelyprogressbar.LovelyProgressBar;
 
 import org.json.JSONObject;
 
@@ -30,11 +36,18 @@ public class LoginActivity extends Activity {
     private EditText mPassEdit;
     private Button mLoginBtn;
     private TextView mRegister;
+    private ImageView mImageView;
+    private marqueeText marquee;//跑马灯TextView
+    private LovelyProgressBar mbar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+//        MyBuilder myBuilder = new MyBuilder().setA("a").setB("b");//Builder模式
+//        String imgPath = "https://images.unsplash.com/photo-1552810060-5952b12bd1d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
+        String imgPath = " ";
+        MyGlide.loadImg(this,imgPath,mImageView);
 //        setWeather();
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -54,18 +67,41 @@ public class LoginActivity extends Activity {
         mRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Retrofits.get();
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
+                //加载成功调用即可执行成功动画
+        mbar.succesLoad();
             }
         });
     }
 
     private void initView(){
+        mbar = (LovelyProgressBar)findViewById(R.id.loader);
+        //设置动画回调
+        mbar.setOnLoadListener(new LovelyProgressBar.OnLoadListener() {
+            @Override
+            public void onAnimSuccess() {
+                Toast.makeText(LoginActivity.this,"LovelyProfressBar+onAnimSuccess",Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onAnimError() {
+                Toast.makeText(LoginActivity.this,"LovelyProfressBar+onAnimError",Toast.LENGTH_LONG).show();
+            }
+        });
+        marquee = (marqueeText)findViewById(R.id.tv2);
+        marquee.setSelected(true);
         mNameEdit = (EditText)findViewById(R.id.et_user);
+        mbar.startload();//设置progress前先startload（）
+        mbar.setProgress(0);//设置进度,100:自动启动succesload动画
+//加载失败调用即可失败动画
+//        mbar.errorLoad();
         mPassEdit = (EditText)findViewById(R.id.et_pass);
         mPassTextInput = (TextInputLayout)findViewById(R.id.textinput_pass);
         mLoginBtn = (Button)findViewById(R.id.btn_login);
         mRegister = (TextView)findViewById(R.id.register);
         mNameTextInput = (TextInputLayout)findViewById(R.id.textinput_user);
+        mImageView = (ImageView)findViewById(R.id.img_exp);
         //启用计数功能
         mNameTextInput.setCounterEnabled(true);
         //设置计数功能的阈值
