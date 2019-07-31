@@ -1,7 +1,6 @@
 package com.gufra.Activity;
 
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -10,6 +9,8 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.FrameLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.gufra.gufra.R;
 
@@ -89,7 +90,8 @@ public class MyWebActivity extends AppCompatActivity {
         //隐藏webview缩放按钮
         mWebView.getSettings().setDisplayZoomControls(false);
         //webView.loadUrl("https://springgame.com");
-        mWebView.loadUrl(url);
+//        mWebView.loadUrl(url);
+        mWebView.loadUrl("file:///android_asset/yu.html");
 
     }
 

@@ -3,7 +3,6 @@ package com.gufra.Activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -14,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.textfield.TextInputLayout;
 import com.gufra.AsyncHttp.NetWorkImpl;
 import com.gufra.Glide.MyGlide;
 import com.gufra.Retrofits.Retrofits;
@@ -70,7 +70,6 @@ public class LoginActivity extends Activity {
                 Retrofits.get();
                 startActivity(new Intent(LoginActivity.this,RegisterActivity.class));
                 //加载成功调用即可执行成功动画
-        mbar.succesLoad();
             }
         });
     }
@@ -96,6 +95,7 @@ public class LoginActivity extends Activity {
         mbar.setProgress(0);//设置进度,100:自动启动succesload动画
 //加载失败调用即可失败动画
 //        mbar.errorLoad();
+        mbar.succesLoad();
         mPassEdit = (EditText)findViewById(R.id.et_pass);
         mPassTextInput = (TextInputLayout)findViewById(R.id.textinput_pass);
         mLoginBtn = (Button)findViewById(R.id.btn_login);
@@ -108,7 +108,6 @@ public class LoginActivity extends Activity {
         mNameTextInput.setCounterMaxLength(MAX_LENGTH);
         //显示/隐藏密码的眼睛
         mPassTextInput.setPasswordVisibilityToggleEnabled(true);
-
         //输入检查
         mPassEdit.addTextChangedListener(new TextWatcher() {
             @Override

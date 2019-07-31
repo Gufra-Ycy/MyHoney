@@ -5,14 +5,14 @@
     android:orientation="vertical"
     android:background="#0ff">
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/drawer_tool"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="#0f0" />
 
 
-    <android.support.v4.widget.DrawerLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawer_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -24,6 +24,6 @@
 
         <include layout="@layout/layout_navigation"/>
         <!--<include layout="@layout/layout_drawer_normal"/>-->
-    </android.support.v4.widget.DrawerLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </LinearLayout>

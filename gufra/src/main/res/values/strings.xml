@@ -2,4 +2,8 @@
     <string name="app_name">gufra</string>
     <string name="drawer_start">start</string>
     <string name="drawer_end">end</string>
+
+    <string name="title_activity_media">MediaActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

@@ -3,15 +3,19 @@
     package="com.gufra.gufra">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-
     <application>
+        <activity
+            android:name="com.gufra.Activity.MediaActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:label="@string/title_activity_media"
+            android:theme="@style/FullscreenTheme">
 
+        </activity>
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />
-
-
+        <service android:name="com.zlw.main.recorderlib.recorder.RecordService" />
     </application>
 
 </manifest>

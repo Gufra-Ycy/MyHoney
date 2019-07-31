@@ -1,8 +1,9 @@
 package com.gufra.Glide;
 
 import android.content.Context;
-import android.support.v4.app.Fragment;
 import android.widget.ImageView;
+
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 

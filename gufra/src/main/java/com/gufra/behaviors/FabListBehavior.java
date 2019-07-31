@@ -1,9 +1,11 @@
 package com.gufra.behaviors;
 
-import android.support.annotation.NonNull;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 public class FabListBehavior extends FloatingActionButton.Behavior{
 

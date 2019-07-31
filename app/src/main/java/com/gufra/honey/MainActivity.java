@@ -3,9 +3,10 @@ package com.gufra.honey;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.constraint.ConstraintLayout;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
+
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.gufra.Activity.LoginActivity;
 

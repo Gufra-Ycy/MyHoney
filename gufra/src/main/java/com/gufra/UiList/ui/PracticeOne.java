@@ -1,10 +1,11 @@
 package com.gufra.UiList.ui;
 
 import android.os.Bundle;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 import com.gufra.UiList.widgets.BasicView;
 import com.gufra.UiList.widgets.HistogramView;
 import com.gufra.UiList.widgets.PathView;
@@ -33,11 +34,11 @@ public class PracticeOne extends AppCompatActivity {
         titles.add("path");
         titles.add("直方图");
         titles.add("饼图");
-        List<com.example.yuanping.uilist.ui.UIFragment>fragments = new ArrayList<>();
-        fragments.add(new com.example.yuanping.uilist.ui.UIFragment(new BasicView(this)));
-        fragments.add(new com.example.yuanping.uilist.ui.UIFragment(new PathView(this)));
-        fragments.add(new com.example.yuanping.uilist.ui.UIFragment(new HistogramView(this)));
-        fragments.add(new com.example.yuanping.uilist.ui.UIFragment(new PieChartViw(this)));
+        List<com.gufra.UiList.ui.UIFragment>fragments = new ArrayList<>();
+        fragments.add(new com.gufra.UiList.ui.UIFragment(new BasicView(this)));
+        fragments.add(new com.gufra.UiList.ui.UIFragment(new PathView(this)));
+        fragments.add(new com.gufra.UiList.ui.UIFragment(new HistogramView(this)));
+        fragments.add(new com.gufra.UiList.ui.UIFragment(new PieChartViw(this)));
 
         UIPagerAdapter adapter = new UIPagerAdapter(titles,fragments,getSupportFragmentManager());
 

@@ -1,7 +1,9 @@
 package com.gufra.Utils;
 
 import android.app.Activity;
+import android.app.ActivityManager;
 import android.app.Dialog;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
@@ -178,7 +180,7 @@ public class AppUtils {
 
     /**
      * 获取签名keyhash
-     * @param Activity
+     * @param activity
      * @return string
      */
     public String getKeyHash(Activity activity){
@@ -195,5 +197,48 @@ public class AppUtils {
             e.printStackTrace();
         }
         return keyHash;
+    }
+
+/**
+ * 获取app运行状态
+ * @param  context
+ * @param packageName
+ * @return 0:不存在，1：前台，2：后台
+  */
+
+    public int isAppLive(Context context, String packageName){
+        ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo>listInfos = activityManager.getRunningTasks(20);
+        //判断程序是否在栈顶
+        if (listInfos.get(0).topActivity.getPackageName().equals(packageName)){
+            return 1;
+        }else {
+            //判断是否在栈里
+            for (ActivityManager.RunningTaskInfo taskInfo:listInfos){
+                if (taskInfo.topActivity.getPackageName().equals(packageName)){
+                    return 2;
+                }
+            }
+            return 0;
+        }
+    }
+
+    /**
+     * 某个service是否在运行
+     * @param context
+     * @param runService
+     * @return boolean
+     */
+    public boolean  isServiceRunning(Context context,Class<? extends Service> runService){
+        ActivityManager activityManager = (ActivityManager)context.getSystemService(Context.ACTIVITY_SERVICE);
+        ArrayList<ActivityManager.RunningServiceInfo>runningServiceInfos =
+                (ArrayList<ActivityManager.RunningServiceInfo>) activityManager.getRunningServices(1024);
+
+        for (int i = 0; i < runningServiceInfos.size(); i++){
+            if (runService.getName().equals(runningServiceInfos.get(i).service.getClassName().toString())){
+                return true;
+            }
+        }
+        return false;
     }
 }

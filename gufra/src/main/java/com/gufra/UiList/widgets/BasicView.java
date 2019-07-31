@@ -15,6 +15,7 @@ import android.view.View;
 public class BasicView extends View {
 
     Paint mPaint;
+    Paint mPaint2;
 
     public BasicView(Context context) {
         super(context);
@@ -50,5 +51,8 @@ public class BasicView extends View {
         canvas.drawLine(0,0,500,500,mPaint);
 
         canvas.drawCircle(500,500,200,mPaint);
+        mPaint2 = new Paint(Paint.ANTI_ALIAS_FLAG);
+        mPaint2.setStyle(Paint.Style.STROKE);
+        mPaint2.setColor(Color.RED);
     }
 }

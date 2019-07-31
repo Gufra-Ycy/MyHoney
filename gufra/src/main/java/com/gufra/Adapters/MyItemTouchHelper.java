@@ -1,8 +1,10 @@
 package com.gufra.Adapters;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+
 import android.util.Log;
+
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class MyItemTouchHelper extends ItemTouchHelper.Callback{
     private ItemTouchAdapter adapter ;

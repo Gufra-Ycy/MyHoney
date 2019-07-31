@@ -1,17 +1,18 @@
 package com.gufra.UiList.ui;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import java.util.List;
 
 public class UIPagerAdapter extends FragmentPagerAdapter {
     private static String TAG = "UIPagerAdapter";
     List<String>titles;
-    List<com.example.yuanping.uilist.ui.UIFragment>fragments;
-    public UIPagerAdapter(List<String>titles, List<com.example.yuanping.uilist.ui.UIFragment>fragments, FragmentManager fm) {
+    List<com.gufra.UiList.ui.UIFragment>fragments;
+    public UIPagerAdapter(List<String>titles, List<com.gufra.UiList.ui.UIFragment>fragments, FragmentManager fm) {
         super(fm);
         this.titles = titles;
         this.fragments = fragments;
