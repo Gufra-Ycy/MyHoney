@@ -1,20 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gufra.gufra">
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application>
+        <activity
+            android:name="com.gufra.Activity.LoginActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.gufra.Activity.RegisterActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.gufra.Activity.HoneyActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.gufra.Activity.DrawerLayoutActivity"
+            android:theme="@style/AppTheme"/>
+
+        <service
+            android:name="com.gufra.Services.MyService"
+            android:enabled="true"
+            android:exported="true"/>
+
+        <activity
+            android:name="com.gufra.Activity.MyWebActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.gufra.Activity.SearchActivity"
+            android:theme="@style/AppTheme"/>
+        <activity
+            android:name="com.gufra.UiList.ui.PracticeOne"
+            android:theme="@style/AppTheme"/>
+
+        <activity android:name="com.gufra.Activity.FloatActivity"
+            android:theme="@style/AppTheme"
+            android:label="bubble"
+            android:allowEmbedded="true"
+            android:documentLaunchMode="always"
+            android:resizeableActivity="true"/>
+
         <activity
             android:name="com.gufra.Activity.MediaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_media"
-            android:theme="@style/FullscreenTheme">
-
-        </activity>
+            android:theme="@style/FullscreenTheme"/>
 
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />
+
         <service android:name="com.zlw.main.recorderlib.recorder.RecordService" />
     </application>
 

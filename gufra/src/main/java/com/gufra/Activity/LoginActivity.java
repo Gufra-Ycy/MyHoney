@@ -1,7 +1,9 @@
 package com.gufra.Activity;
 
 import android.app.Activity;
+import android.app.NotificationManager;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -17,6 +19,7 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.gufra.AsyncHttp.NetWorkImpl;
 import com.gufra.Glide.MyGlide;
 import com.gufra.Retrofits.Retrofits;
+import com.gufra.Utils.NotificationHelper;
 import com.gufra.View.marqueeText;
 import com.gufra.Volley.MyVolley;
 import com.gufra.gufra.R;
@@ -44,6 +47,11 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+            NotificationHelper notificationHelper = new NotificationHelper(this);
+            notificationHelper.createNotificationChannel("notification test","通知测试", NotificationManager.IMPORTANCE_HIGH);
+        }
+
 //        MyBuilder myBuilder = new MyBuilder().setA("a").setB("b");//Builder模式
 //        String imgPath = "https://images.unsplash.com/photo-1552810060-5952b12bd1d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
         String imgPath = " ";
@@ -54,7 +62,7 @@ public class LoginActivity extends Activity {
             public void onClick(View view) {
                 MyVolley volley =new MyVolley(LoginActivity.this);
 //                volley.volleyGet("http://apis.juhe.cn/simpleWeather/query");
-                String s = volley.volleyGet("https://api.seniverse.com/v3/weather/now.json?key=3bfkkpzne3jubseb&location=beijing&language=zh-Hans&unit=c");
+                String s = MyVolley.volleyGet("https://api.seniverse.com/v3/weather/now.json?key=3bfkkpzne3jubseb&location=beijing&language=zh-Hans&unit=c");
                 Log.e("NetWorkImpl","1223456:"+s);
                 startActivity(new Intent(LoginActivity.this,HoneyActivity.class));
                 if (isAccess()){

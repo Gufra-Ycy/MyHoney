@@ -6,4 +6,9 @@
     <string name="title_activity_media">MediaActivity</string>
     <string name="dummy_button">Dummy Button</string>
     <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="ok">OK</string>
+    <string name="permission_storage_rationale">读取外部存储权限</string>
+    <string name="permission_storage_available">Storage permission is available. Starting preview.</string>
+    <string name="permission_storage_granted">Storage permission was granted. Starting preview.</string>
 </resources>

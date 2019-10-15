@@ -103,4 +103,8 @@ public class HoneyActivity extends Activity {
         mTurnPracticeBtn = (Button)findViewById(R.id.turn_practice);
     }
 
+    /** 通知*/
+    public void onNotification(View view){
+
+    }
 }

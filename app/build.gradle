@@ -1,34 +1,44 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
     defaultConfig {
         applicationId "com.gufra.honey"
         minSdkVersion 16
-        targetSdkVersion 28
+        targetSdkVersion 29
         versionCode 1
         versionName "1.0"
         flavorDimensions "versionCode"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
-//
-//    productFlavors{
-//        baidu{
-//            applicationId "com.test1"
-//            manifestPlaceholders =  [APP_NAME: "test1"]
-//        }
-//        uc{
-//            applicationId "com.test2"
-//            manifestPlaceholders =  [APP_NAME: "test2"]
-//        }
-//    }
+
+    productFlavors{
+        baidu{
+//            dimension "1"
+            applicationIdSuffix ".baidu"
+            versionNameSuffix "-baidu"
+            applicationId "com.test1"
+            manifestPlaceholders =  [APP_NAME: "test1"]
+        }
+        uc{
+//            dimension "1"
+            applicationIdSuffix ".uc"
+            versionNameSuffix "-uc"
+            applicationId "com.test2"
+            manifestPlaceholders =  [APP_NAME: "test2"]
+        }
+    }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-
+        staging {
+            initWith debug
+            manifestPlaceholders = [hostName:"internal.example.com"]
+            applicationIdSuffix ".debugStaging"
+        }
     }
 }
 
