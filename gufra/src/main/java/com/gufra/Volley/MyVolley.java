@@ -12,7 +12,7 @@ import com.android.volley.toolbox.Volley;
 
 import static com.android.volley.Request.*;
 
-public class MyVolley {
+public class  MyVolley {
     private static String TAG = "NetWorkImpl";
     private static RequestQueue mQueue;
     private Context mContext;

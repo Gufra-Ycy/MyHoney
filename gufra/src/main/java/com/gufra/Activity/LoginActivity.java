@@ -18,7 +18,9 @@ import android.widget.Toast;
 import com.google.android.material.textfield.TextInputLayout;
 import com.gufra.AsyncHttp.NetWorkImpl;
 import com.gufra.Glide.MyGlide;
+import com.gufra.OkHttp3.MyOkHttp;
 import com.gufra.Retrofits.Retrofits;
+import com.gufra.Utils.AssetsUtil;
 import com.gufra.Utils.NotificationHelper;
 import com.gufra.View.marqueeText;
 import com.gufra.Volley.MyVolley;
@@ -47,14 +49,15 @@ public class LoginActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         initView();
+        Log.d("gufra.LoginActivity","assets.appinfo.json"+AssetsUtil.getAssets(this,"appinfo.json"));
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
             NotificationHelper notificationHelper = new NotificationHelper(this);
             notificationHelper.createNotificationChannel("notification test","通知测试", NotificationManager.IMPORTANCE_HIGH);
         }
 
 //        MyBuilder myBuilder = new MyBuilder().setA("a").setB("b");//Builder模式
-//        String imgPath = "https://images.unsplash.com/photo-1552810060-5952b12bd1d6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=500&q=60";
-        String imgPath = " ";
+        String imgPath = "http://cn.bing.com/az/hprichbg/rb/TOAD_ZH-CN7336795473_1920x1080.jpg";
+//        String imgPath = " ";
         MyGlide.loadImg(this,imgPath,mImageView);
 //        setWeather();
         mLoginBtn.setOnClickListener(new View.OnClickListener() {
@@ -68,6 +71,7 @@ public class LoginActivity extends Activity {
                 if (isAccess()){
 
                 }
+                MyOkHttp.GET("https://api.seniverse.com/v3/weather/now.json?key=3bfkkpzne3jubseb&location=beijing&language=zh-Hans&unit=c");
             }
         });
         ByteArrayInputStream bais;

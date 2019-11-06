@@ -3,9 +3,14 @@ package com.gufra.honey;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.drawable.Icon;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,25 +18,42 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.Person;
 import androidx.core.content.ContextCompat;
+import androidx.core.graphics.drawable.IconCompat;
 
 import com.google.android.material.snackbar.Snackbar;
 import com.gufra.Activity.FloatActivity;
 import com.gufra.Activity.LoginActivity;
+import com.gufra.Services.MyService;
 
 public class MainActivity extends Activity implements ActivityCompat.OnRequestPermissionsResultCallback {
     private String TAG = "MainActivity";
     private final int PERMISSIONS_REQUEST_STORAGE = 1;
     private View mLayout;
+    NotificationManager notificationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        bubble(MainActivity.this);
+
+        // Android 8.0使用startForegroundService在前台启动新服务
+        Intent myService = new Intent(this, MyService.class);
+        startService(myService);
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O)
+        {
+            startForegroundService(myService);
+        }
+        else{
+            startService(myService);
+        }
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        showBubble();
+//        bubble(MainActivity.this);
         //启动闪屏动画
         ConstraintLayout layout = (ConstraintLayout) findViewById(R.id.main_layout);
         AlphaAnimation alphaAnimation = new AlphaAnimation(0.1f, 1.0f);
@@ -75,6 +97,52 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         super.onTopResumedActivityChanged(isTopResumedActivity);
     }
 
+    /**显示气泡*/
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void showBubble(){
+        //创建通知渠道
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel channel = new NotificationChannel("通知渠道id","通知渠道名称",NotificationManager.IMPORTANCE_HIGH);
+            notificationManager.createNotificationChannel(channel);
+        }
+        Icon icon = Icon.createWithResource(this,R.drawable.ying);
+        Person chatBot = new Person.Builder()
+                .setBot(true)
+                .setName("BubbleBot")
+                .setIcon(IconCompat.createFromIcon(icon))
+                .build();
+        PendingIntent contentIntent = PendingIntent.getActivity(this,1,new Intent(this,BubbleActivity.class),PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent bubbleIntent = PendingIntent.getActivity(this,2,new Intent(this,BubbleActivity.class),PendingIntent.FLAG_UPDATE_CURRENT);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.Q) {
+            Notification.BubbleMetadata bubbleMetadata = new Notification.BubbleMetadata.Builder()
+                    .setAutoExpandBubble(true)
+                    .setIcon(icon)
+                    .setDesiredHeight(400)
+                    .setIntent(bubbleIntent)
+                    .build();
+
+            Notification.Builder builder = new Notification.Builder(this,"通知渠道id")
+                    .setContentTitle("通知标题")
+                    .setContentText("通知内容")
+                    .setContentIntent(contentIntent)
+                    .setSmallIcon(icon)
+                    .setBubbleMetadata(bubbleMetadata)
+//                    .addPerson(String.valueOf(chatBot))
+                    .setShowWhen(true);
+
+            notificationManager.notify(0,builder.build());
+        }
+    }
+    /**判断是否允许了气泡*/
+    public boolean canBubble(String channelId){
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            NotificationChannel channel = notificationManager.getNotificationChannel(channelId);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                return notificationManager.areBubblesAllowed() &&  channel.canBubble();
+            }
+        }
+        return false;
+    }
     /**
      * Bubble
      */
@@ -82,7 +150,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         // Create bubble intent
         Intent target = new Intent(mContext, FloatActivity.class);
         PendingIntent bubbleIntent =
-                PendingIntent.getActivity(mContext, 0, target, 0 /* flags */);
+                PendingIntent.getActivity(mContext, 1110, target, 0/* flags */);
 
 // Create bubble metadata
         Notification.BubbleMetadata bubbleData =
@@ -91,6 +159,9 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             bubbleData = new Notification.BubbleMetadata.Builder()
                     .setDesiredHeight(600)
                     .setIntent(bubbleIntent)
+                    .setIcon(Icon.createWithResource(mContext, R.drawable.ying))
+                    .setAutoExpandBubble(true)
+//                    .setSuppressInitialNotification(true)
                     .build();
         }
 
@@ -105,7 +176,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
             Notification.Builder builder =
                     new Notification.Builder(mContext, "channel001")
 //                            .setContentIntent(contentIntent)
-//                            .setSmallIcon(smallIcon)
+                            .setSmallIcon(R.drawable.user)
                             .setBubbleMetadata(bubbleData)
                             .addPerson(String.valueOf(chatBot));
         }

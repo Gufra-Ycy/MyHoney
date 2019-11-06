@@ -40,7 +40,7 @@ public class DrawerLayoutActivity extends AppCompatActivity {
     private void initView() {
         mToolBar = (Toolbar)findViewById(R.id.drawer_tool);
         mDrawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
-        setSupportActionBar(mToolBar);
+//        setSupportActionBar(mToolBar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);//1.显示
         mActionBarDrawerToggle = new ActionBarDrawerToggle(this,mDrawerLayout,mToolBar,
                 R.string.drawer_start,R.string.drawer_end);//2.传入tool可以点击

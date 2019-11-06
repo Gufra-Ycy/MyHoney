@@ -12,20 +12,20 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
 
-    productFlavors{
-        baidu{
+    productFlavors {
+        baidu {
 //            dimension "1"
             applicationIdSuffix ".baidu"
             versionNameSuffix "-baidu"
             applicationId "com.test1"
-            manifestPlaceholders =  [APP_NAME: "test1"]
+            manifestPlaceholders = [APP_NAME: "test1"]
         }
-        uc{
+        uc {
 //            dimension "1"
             applicationIdSuffix ".uc"
             versionNameSuffix "-uc"
             applicationId "com.test2"
-            manifestPlaceholders =  [APP_NAME: "test2"]
+            manifestPlaceholders = [APP_NAME: "test2"]
         }
     }
 
@@ -36,7 +36,7 @@ android {
         }
         staging {
             initWith debug
-            manifestPlaceholders = [hostName:"internal.example.com"]
+            manifestPlaceholders = [hostName: "internal.example.com"]
             applicationIdSuffix ".debugStaging"
         }
     }
@@ -45,8 +45,20 @@ android {
 dependencies {
     implementation project(':gufra')
     implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
 }
+
+//class a implements Plugin<Project>{
+//
+//    @Override
+//    void apply(Project target) {
+//        project.task('app')<<{
+//            println('hello')
+//        }
+//    }
+//}
+//apply plugin: a
