@@ -97,6 +97,7 @@ public class MainActivity extends Activity implements ActivityCompat.OnRequestPe
         super.onTopResumedActivityChanged(isTopResumedActivity);
     }
 
+
     /**显示气泡*/
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void showBubble(){

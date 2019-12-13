@@ -30,6 +30,7 @@ dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.0.0'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     testImplementation 'junit:junit:4.12'
@@ -59,4 +60,69 @@ dependencies {
     api 'org.greenrobot:eventbus:3.1.1'//eventbus
     api 'com.facebook.stetho:stetho:1.4.1'
     api 'com.facebook.stetho:stetho-okhttp3:1.4.1'
+
+    api "android.arch.work:work-runtime:1.0.1"
+
 }
+task compile {
+    group 'compile'
+    description 'compile task'
+    enabled false
+    println 'compile'
+    doFirst {
+        println 'compile:doFirst'
+    }
+}
+
+tasks.create(name: 'lastTest', dependsOn: compile) {
+    group 'lastTest'
+    description 'lastTest task'
+    println 'lastTest'
+    doLast {
+        println 'lastTest:doLast'
+    }
+}
+tasks.create('packaging') {
+    group 'packaging'
+    description 'packaging task'
+    dependsOn(lastTest)
+    println 'packaging'
+    doLast {
+        println 'packaging:doLast'
+    }
+}
+
+class Install extends DefaultTask {
+    String installName
+
+    void checkObject() {
+        println("checkObj:")
+    }
+
+    void installObject() {
+        println 'installObj'
+    }
+}
+
+task install(type: Install) {
+    group 'install'
+    description 'install task'
+    installName 'test.jar'
+    println 'install'
+    doFirst {
+        println "install:doFirst ${installName}"
+    }
+    doLast {
+        println "install:doLast ${installName}"
+    }
+}
+install.dependsOn 'packaging'
+//jar
+//jar {
+//    manifest {
+//        attributes 'Implementation-Title': 'Gradle plugin sample: create jar distribution',
+//                'Implementation-Version': 1.0,
+//                'Created-By': 'liumiaocn'
+//    }
+//}
+

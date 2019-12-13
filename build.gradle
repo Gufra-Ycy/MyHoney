@@ -1,4 +1,8 @@
 buildscript {
+    //可定义全局变量
+    ext{
+        VersionName = '1.0.0'
+    }
     repositories {
         maven() {
             url 'https://maven.aliyun.com/repository/jcenter'
@@ -15,6 +19,7 @@ buildscript {
         maven(){
             url 'https://jitpack.io'
         }
+
         google()
     }
     dependencies {

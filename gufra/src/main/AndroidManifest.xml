@@ -1,56 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.gufra.gufra">
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application>
-        <uses-library android:name="org.apache.http.legacy" android:required="false"/>
+        <activity android:name="com.gufra.Activity.modleActivity"></activity>
+        <activity android:name="com.gufra.Activity.WallPaperActivity" /> <!-- 配置实时壁纸Service -->
         <activity
             android:name="com.gufra.Activity.LoginActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
+
         <activity
             android:name="com.gufra.Activity.RegisterActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.gufra.Activity.HoneyActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.gufra.Activity.DrawerLayoutActivity"
-            android:theme="@style/AppTheme"/>
-
-        <service
-            android:name="com.gufra.Services.MyService"
-            android:enabled="true"
-            android:exported="true"/>
-
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.gufra.Activity.MyWebActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.gufra.Activity.SearchActivity"
-            android:theme="@style/AppTheme"/>
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.gufra.UiList.ui.PracticeOne"
-            android:theme="@style/AppTheme"/>
-
-        <activity android:name="com.gufra.Activity.FloatActivity"
-            android:theme="@style/AppTheme"
-            android:label="bubble"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:name="com.gufra.Activity.FloatActivity"
             android:allowEmbedded="true"
             android:documentLaunchMode="always"
-            android:resizeableActivity="true"/>
-
+            android:label="bubble"
+            android:resizeableActivity="true"
+            android:theme="@style/AppTheme" />
         <activity
             android:name="com.gufra.Activity.MediaActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:label="@string/title_activity_media"
-            android:theme="@style/FullscreenTheme"/>
-
+            android:theme="@style/FullscreenTheme" />
         <meta-data
             android:name="com.google.android.actions"
             android:resource="@xml/actions" />
 
+        <service
+            android:name="com.gufra.LiveWallPaper"
+            android:label="@string/app_name"
+            android:permission="android.permission.BIND_WALLPAPER"
+            android:process=":wallpaper">
+
+            <!-- 为实时壁纸配置intent-filter -->
+            <intent-filter>
+                <action android:name="android.service.wallpaper.WallpaperService" />
+            </intent-filter>
+            <!-- 为实时壁纸配置meta-data -->
+            <meta-data
+                android:name="android.service.wallpaper"
+                android:resource="@xml/livewallpaper" />
+        </service>
+
+        <service
+            android:name="com.gufra.Services.MyService"
+            android:enabled="true"
+            android:exported="true" />
         <service android:name="com.zlw.main.recorderlib.recorder.RecordService" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
     </application>
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
 </manifest>

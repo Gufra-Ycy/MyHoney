@@ -89,12 +89,20 @@
             android:textSize="20dp"
             android:text="通知"
             android:onClick="onNotification"/>
-        <TextView
+        <Button
+            android:id="@+id/turn_wallpaper"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:gravity="center"
             android:textSize="20dp"
-            android:text="text" />
+            android:text="壁纸" />
+        <Button
+            android:id="@+id/turn_model"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:text="Model" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="50dp"

@@ -24,7 +24,7 @@ public class HoneyActivity extends Activity {
     private Button mTurnSearchBtn;
     private Button mTurnMediaBtn;
     private Button mTurnPracticeBtn;
-
+    private Button mTurnWallpaperBtn,mTurnModelBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +92,18 @@ public class HoneyActivity extends Activity {
                 startActivity(new Intent(HoneyActivity.this, PracticeOne.class));
             }
         });
+        mTurnWallpaperBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(HoneyActivity.this, WallPaperActivity.class));
+            }
+        });
+        mTurnModelBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HoneyActivity.this,modleActivity.class));
+            }
+        });
     }
 
     private void initView(){
@@ -101,6 +113,8 @@ public class HoneyActivity extends Activity {
         mTurnSearchBtn = (Button)findViewById(R.id.turn_search);
         mTurnMediaBtn = (Button)findViewById(R.id.turn_media);
         mTurnPracticeBtn = (Button)findViewById(R.id.turn_practice);
+        mTurnWallpaperBtn = (Button)findViewById(R.id.turn_wallpaper);
+        mTurnModelBtn = (Button)findViewById(R.id.turn_model);
     }
 
     /** 通知*/
